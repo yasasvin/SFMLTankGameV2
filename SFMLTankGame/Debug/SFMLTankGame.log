@@ -1,0 +1,9 @@
+﻿  Main.cpp
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\entity.h(14): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\entity.h(17): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\player.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\main.cpp(25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\main.cpp(119): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\main.cpp(55): warning C4101: 'event': unreferenced local variable
+  SFMLTankGame.vcxproj -> C:\Users\chamara\Documents\Visual Studio 2015\Projects\spritetankfiles\Simple turret AI\SFMLTankGame\Debug\SFMLTankGame.exe
+  SFMLTankGame.vcxproj -> C:\Users\chamara\Documents\Visual Studio 2015\Projects\spritetankfiles\Simple turret AI\SFMLTankGame\Debug\SFMLTankGame.pdb (Full PDB)
