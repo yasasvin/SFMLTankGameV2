@@ -8,8 +8,8 @@
 
 using namespace std;
 
-const int windowWidth = 800;
-const int windowHeight = 800;
+const int windowWidth = 1000;
+const int windowHeight = 1000;
 
 const float R = 180 / 3.14159265;
 
@@ -26,12 +26,23 @@ public:
 	//player stuff
 	sf::Sprite tankHull;
 	sf::Sprite tankTurret;
-	sf::CircleShape shape;
 	sf::CircleShape target;
+	sf::CircleShape target2;
+	sf::CircleShape shape;
 	sf::RectangleShape line;
+	sf::RectangleShape hullHit;
+	sf::RectangleShape hullHit2;
+
+	//neutral stuff
+	sf::Clock clock;
+	sf::Clock clock2;
+
+	//sf::Font font;
 
 	//enemy stuff
 	sf::CircleShape trigger;
 	sf::Sprite enemyTurret;
+	sf::CircleShape shape2;
+	sf::CircleShape turretBase;
 
 };

@@ -8,7 +8,18 @@ public:
 
 	//enemy();
 	void updateEnemy();
-	void updateEnemyTurretRotation();
 	void updateEnemyProjectile();
 
+	int hp = 5;
+	bool alive = true;
+};
+
+class textDisplay : public entity
+{
+public:
+
+	string textString = "0000";
+
+	textDisplay();
+	void textUpdate();
 };

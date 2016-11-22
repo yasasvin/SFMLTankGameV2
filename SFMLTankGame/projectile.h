@@ -8,5 +8,15 @@ public:
 
 	projectile();
 	void updateProjectile();
+	bool destroyProjectile = false;
+
+};
+
+class enemyProjectile : public entity
+{
+public:
+
+	enemyProjectile();
+	void updateEnemyProjectile();
 
 };

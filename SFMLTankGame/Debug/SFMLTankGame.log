@@ -1,9 +1,27 @@
-﻿  Main.cpp
+﻿  projectile.cpp
 c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\entity.h(14): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\entity.h(17): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\player.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\main.cpp(25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\main.cpp(119): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\main.cpp(55): warning C4101: 'event': unreferenced local variable
+  player.cpp
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\entity.h(14): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\entity.h(17): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\player.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Map.cpp
+  Main.cpp
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\entity.h(14): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\entity.h(17): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\player.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\main.cpp(21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\main.cpp(51): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\main.cpp(133): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\main.cpp(49): warning C4101: 'event': unreferenced local variable
+  enemy.cpp
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\entity.h(14): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\entity.h(17): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\chamara\documents\visual studio 2015\projects\spritetankfiles\simple turret ai\sfmltankgame\sfmltankgame\enemy.cpp(29): warning C4996: 'sf::Text::setColor': was declared deprecated
+  c:\sfml-2.4.0\include\sfml\graphics\text.hpp(177): note: see declaration of 'sf::Text::setColor'
+  Generating Code...
+     Creating library C:\Users\chamara\Documents\Visual Studio 2015\Projects\spritetankfiles\Simple turret AI\SFMLTankGame\Debug\SFMLTankGame.lib and object C:\Users\chamara\Documents\Visual Studio 2015\Projects\spritetankfiles\Simple turret AI\SFMLTankGame\Debug\SFMLTankGame.exp
+sfml-main-d.lib(MainWin32.cpp.obj) : warning LNK4099: PDB 'vc140.pdb' was not found with 'sfml-main-d.lib(MainWin32.cpp.obj)' or at 'C:\Users\chamara\Documents\Visual Studio 2015\Projects\spritetankfiles\Simple turret AI\SFMLTankGame\Debug\vc140.pdb'; linking object as if no debug info
   SFMLTankGame.vcxproj -> C:\Users\chamara\Documents\Visual Studio 2015\Projects\spritetankfiles\Simple turret AI\SFMLTankGame\Debug\SFMLTankGame.exe
   SFMLTankGame.vcxproj -> C:\Users\chamara\Documents\Visual Studio 2015\Projects\spritetankfiles\Simple turret AI\SFMLTankGame\Debug\SFMLTankGame.pdb (Full PDB)

@@ -1,7 +1,3 @@
-#include <SFML/Graphics.hpp>
-using namespace std;
-#include <iostream>
-
 #include "player.h"
 #include "entity.h"
 #include "projectile.h"
@@ -22,8 +18,8 @@ void drawEmptyTiles(Map &map, sf::RenderWindow &window)
 			else
 			{
 				sf::RectangleShape block;
-				block.setPosition(row * 32, col * 32);
-				block.setSize(sf::Vector2f(32,32));
+				block.setPosition(row * 80, col * 80);
+				block.setSize(sf::Vector2f(75, 75));
 
 				block.setFillColor(sf::Color::Red);
 
@@ -36,13 +32,11 @@ void drawEmptyTiles(Map &map, sf::RenderWindow &window)
 
 int main()
 {
-	int counter1 = 0;
-	int counter2 = 0;
-	int counter3 = 0;
-
 	bool drawGridCells = true;
 	bool drawEmptyPath = true;
 
+	int counter1 = 0;
+	int counter2 = 0;
 
 	sf::ContextSettings settings;
 	sf::RenderWindow window (sf::VideoMode(windowWidth, windowHeight), "SFML TANKS", sf::Style::Default, settings);
@@ -54,12 +48,7 @@ int main()
 
 	sf::Event event;
 
-
-	sf::Clock clock;
-	sf::Clock clock2;
-
-	//sf::View mainView(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
-	//sf::View GUI = window.getDefaultView();
+	sf::View mainView(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
 
 	//hull texture
 	sf::Texture hull;
@@ -68,25 +57,51 @@ int main()
 	//turret texture
 	sf::Texture turret;
 	turret.loadFromFile("Turret.png");
-	
-	//shell vector
+
+
+	//turret texture
+	sf::Texture enemyTurret;
+	enemyTurret.loadFromFile("enemyTurret.png");
+
+	class entity entity1;
+
+	//shell iterator
 	vector<projectile>::const_iterator iter;
 	vector<projectile> projectileArray;
+	class projectile projectile1;
 
+	//enemy iterator
+	vector<enemy>::const_iterator iter2;
+	vector<enemy> enemyArray;
+	class enemy enemy1;
+	enemy1.enemyTurret.setTexture(enemyTurret);
+	enemy1.enemyTurret.setPosition(300, 300);
+	enemy1.enemyTurret.setOrigin(sf::Vector2f(22, 20));
+	enemy1.trigger.setPosition(300, 300);
+	enemyArray.push_back(enemy1);
 
+	//enemy shell iterator
+	vector<enemyProjectile>::const_iterator iter3;
+	vector<enemyProjectile> enemyProjectileArray;
+	class enemyProjectile projectile2;
+
+	//player iterator
+	vector<player>::const_iterator iter4;
+	vector<player> playerArray;
 	class  player player1;
 	player1.tankHull.setTexture(hull);
 	player1.tankHull.setPosition(400, 400);
-
 	player1.tankTurret.setTexture(turret);
 	player1.target.setOrigin(sf::Vector2f(19, 4));
 	player1.target.setPosition(400, 400);
+	playerArray.push_back(player1);
 
-	class enemy enemy1;
-	enemy1.enemyTurret.setTexture(turret);
-
-	class projectile projectile1;
-	class projectile projectile2;
+	//text iterator
+	vector<textDisplay>::const_iterator iter5;
+	vector<textDisplay> textArray;
+	class textDisplay text1;
+	//text1.text.setFont(font);
+	textArray.push_back(text1);
 
 	while (window.isOpen())
 	{
@@ -115,20 +130,24 @@ int main()
 				else
 				{
 					sf::RectangleShape block;
-
-					block.setPosition(row * 32, col * 32);
-					block.setSize(sf::Vector2f(28, 28));
+					block.setPosition(row *80,col * 80);
+					block.setSize(sf::Vector2f(75, 75));
 
 					block.setFillColor(sf::Color::Blue);
 
 					//collision detection
 
-					if (block.getGlobalBounds().intersects( player1.tankHull.getGlobalBounds()))
+					if (block.getGlobalBounds().intersects( player1.hullHit2.getGlobalBounds()))
 					{
 						std::cout << "impact" << std::endl;
 						player1.tankHull.move(speed* -cos(player1.tankHull.getRotation()* RM), speed * -sin(player1.tankHull.getRotation() * RM));
-
 					}
+					if (block.getGlobalBounds().intersects(player1.hullHit.getGlobalBounds()))
+					{
+						std::cout << "impact" << std::endl;
+						player1.tankHull.move(speed* cos(player1.tankHull.getRotation()* RM), speed * sin(player1.tankHull.getRotation() * RM));
+					}
+
 				}
 
 			}
@@ -136,17 +155,24 @@ int main()
 		}
 		window.clear();
 
-		//making projectile shoot once per 1/2 sec
-		sf::Time elapsedTime = clock.getElapsedTime();
+		//making projectile shoot once 
+		sf::Time elapsedTime = entity1.clock.getElapsedTime();
 
-		if (elapsedTime.asSeconds() >= 0.5)
+		if (elapsedTime.asSeconds() >= 0.65)
 		{
+			player1.target.setFillColor(sf::Color::Green);
+			player1.target2.setOutlineColor(sf::Color::Green);
+
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
 				projectile1.shape.setPosition(player1.tankHull.getPosition());
 				projectileArray.push_back(projectile1);
+				player1.target.setFillColor(sf::Color::Red);
+				player1.target2.setOutlineColor(sf::Color::Red);
 
-				clock.restart();
+
+
+				entity1.clock.restart();
 			}
 		}
 
@@ -156,35 +182,99 @@ int main()
 		projectile1.shape.setRotation(atan2(mousePosition.y - currentPosition.y, mousePosition.x - currentPosition.x) * R);
 
 
-		// get angle at where enemy located
-		sf::Vector2f playerCurrentPosition = player1.tankTurret.getPosition();
-		sf::Vector2f enemyCurrentPosition = enemy1.enemyTurret.getPosition();
-		
-		sf::Time elapsedTime2 = clock2.getElapsedTime(); // limiting enemy fire rate
-
-		if (player1.tankHull.getGlobalBounds().intersects(enemy1.trigger.getGlobalBounds())) // if player enters the view range (circle) 
-		{
-			enemy1.enemyTurret.setRotation(atan2(playerCurrentPosition.y - enemyCurrentPosition.y, playerCurrentPosition.x - enemyCurrentPosition.x) * R); // rotate to player
-
-			if (elapsedTime2.asSeconds() >= 0.5) // counting timer
-			{
-				projectile2.shape.setRotation(atan2(playerCurrentPosition.y - enemyCurrentPosition.y, playerCurrentPosition.x - enemyCurrentPosition.x) * R); // projectile face player
-
-				// shoot from enemy turret
-				projectile2.shape.setPosition(enemy1.enemyTurret.getPosition());
-				projectileArray.push_back(projectile2);
-
-				clock2.restart();
-			}
-		}
-
 		//updating turret rotation
 		player1.tankTurret.setRotation(atan2(mousePosition.y - currentPosition.y, mousePosition.x - currentPosition.x) * R);
 
+		//crosshair
 		player1.target.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
+		player1.target2.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
 
-		//window.setView(mainView); // main view
-		//mainView.setCenter(player1.tankHull.getPosition()); // follow tank
+		//tank hitboxes lock
+		player1.hullHit.setPosition(static_cast<sf::Vector2f>(player1.tankHull.getPosition()));
+		player1.hullHit2.setPosition(static_cast<sf::Vector2f>(player1.tankHull.getPosition()));
+
+		//text lock
+		text1.text.setPosition(static_cast<sf::Vector2f>(enemy1.tankTurret.getPosition()));
+
+		// get angle at where enemy located
+		sf::Vector2f playerCurrentPosition = player1.tankHull.getPosition();
+		sf::Vector2f enemyCurrentPosition = enemy1.enemyTurret.getPosition();
+
+		// enemy shoot at player
+		counter1 = 0;
+		sf::Time elapsedTime2 = entity1.clock2.getElapsedTime(); // limiting enemy fire rate
+		for (iter2 = enemyArray.begin(); iter2 != enemyArray.end(); iter2++)
+		{
+			enemyArray[counter1].updateEnemy();
+
+			if (player1.tankHull.getGlobalBounds().intersects(enemyArray[counter1].trigger.getLocalBounds())) // if player enters the view range (circle) 
+			{
+				enemyArray[counter1].enemyTurret.setRotation(atan2(playerCurrentPosition.y - enemyCurrentPosition.y, playerCurrentPosition.x - enemyCurrentPosition.x) * R);
+
+				if (elapsedTime2.asSeconds() >= 1) // counting timer
+				{
+					projectile2.shape2.setRotation(atan2(playerCurrentPosition.y - enemyCurrentPosition.y, playerCurrentPosition.x - enemyCurrentPosition.x) * R); // projectile face player
+
+					projectile2.shape2.setPosition(enemy1.enemyTurret.getPosition()); // shoot from enemy turret
+					enemyProjectileArray.push_back(projectile2);
+
+					entity1.clock2.restart();
+				}
+			}
+
+
+			window.draw(enemyArray[counter1].turretBase);
+			window.draw(enemyArray[counter1].enemyTurret);
+			window.draw(enemyArray[counter1].trigger);
+
+			counter1++;
+		}
+
+		//if projectile collides
+		counter1 = 0;
+		for (iter = projectileArray.begin(); iter != projectileArray.end(); iter++)
+		{
+			counter2 = 0;
+			for (iter2 = enemyArray.begin(); iter2 != enemyArray.end(); iter2++)
+			{
+				if (projectileArray[counter1].shape.getGlobalBounds().intersects(enemyArray[counter2].enemyTurret.getGlobalBounds()))
+				{
+					enemyArray[counter2].hp--;
+					projectileArray[counter1].destroyProjectile = true;
+
+					if (enemyArray[counter2].hp <= 0)
+					{
+						enemyArray[counter2].alive = false;
+					}
+				}
+				counter2++;
+				/*if (projectileArray[counter1].shape.getGlobalBounds().intersects(block.getGlobalBounds()))
+				{
+				}*/
+			}
+			counter1++;
+		}
+		//delete enemy
+		counter1 = 0;
+		for (iter2 = enemyArray.begin(); iter2 != enemyArray.end(); iter2++)
+		{
+			if (enemyArray[counter1].alive == false)
+			{
+				enemyArray.erase(iter2);
+				break;
+			}
+			counter1++;
+		}
+		//delete projectile
+		counter1 = 0;
+		for (iter = projectileArray.begin(); iter != projectileArray.end(); iter++)
+		{
+			if (projectileArray[counter1].destroyProjectile == true)
+			{
+				projectileArray.erase(iter);
+				break;
+			}
+		}
 
 		//update player
 		player1.update();
@@ -193,7 +283,7 @@ int main()
 		//draw sprites
 		window.draw(player1.tankHull);
 
-		// draw projectiles
+		// draw player projectiles
 		counter1 = 0;
 		for (iter = projectileArray.begin(); iter != projectileArray.end(); iter++)
 		{
@@ -201,16 +291,36 @@ int main()
 			window.draw(projectileArray[counter1].shape);
 			counter1++;
 		}
+		// draw enemy projectiles
+		counter1 = 0;
+		for (iter3 = enemyProjectileArray.begin(); iter3 != enemyProjectileArray.end(); iter3++)
+		{
+			enemyProjectileArray[counter1].updateEnemyProjectile();
+			window.draw(enemyProjectileArray[counter1].shape2);
+			counter1++;
+		}
+		//draw text
+		counter1 = 0;
+		for (iter5 = textArray.begin(); iter5 != textArray.end(); iter5++)
+		{
+			window.draw(textArray[counter1].text);
+				counter1++;
+		}
 
 		window.draw(player1.tankTurret);
 		window.draw(player1.target);
-		window.draw(enemy1.trigger);
-		window.draw(enemy1.enemyTurret);
+		window.draw(player1.target2);
 
-		enemy1.updateEnemy();
-		//enemy1.updateEnemyTurretRotation();
+		//window.draw(player1.hullHit);
+		//window.draw(player1.hullHit2);
 
-		//window.setView(GUI); // mouse view
+		//window.draw(enemy1.trigger);
+		//window.draw(enemy1.enemyTurret);
+
+		//enemy1.updateEnemy();
+
+		window.setView(mainView); // mouse view
+		mainView.setCenter(player1.tankHull.getPosition());
 
 		if (drawGridCells)
 		{

@@ -4,7 +4,11 @@
 void enemy::updateEnemy()
 {
 	enemyTurret.setOrigin(sf::Vector2f(22, 20));
-	enemyTurret.setPosition(300, 300);
+
+	turretBase.setRadius(30);
+	turretBase.setOrigin(30, 30);
+	turretBase.setFillColor(sf::Color(101, 104, 13));
+	turretBase.setPosition(static_cast<sf::Vector2f>(enemyTurret.getPosition()));
 
 	trigger.setRadius(300);
 	trigger.setFillColor(sf::Color::Transparent);
@@ -15,14 +19,18 @@ void enemy::updateEnemy()
 	trigger.setPosition(static_cast<sf::Vector2f>(enemyTurret.getPosition()));
 }
 
-void enemy::updateEnemyTurretRotation()
-{
-	sf::Vector2f playerCurrentPosition = tankTurret.getPosition();
-	sf::Vector2f enemyCurrentPosition = enemyTurret.getPosition();
-	enemyTurret.setRotation(atan2(playerCurrentPosition.y - enemyCurrentPosition.y, playerCurrentPosition.x - enemyCurrentPosition.x) * R);
-}
-
 void enemy::updateEnemyProjectile()
 {
 	shape.move(Pspeed * cos(shape.getRotation() * RMB), Pspeed * sin(shape.getRotation() * RMB));
+}
+
+textDisplay::textDisplay()
+{
+	text.setColor(sf::Color::Red);
+	text.setCharacterSize(50);
+}
+
+void textDisplay::textUpdate()
+{
+
 }
