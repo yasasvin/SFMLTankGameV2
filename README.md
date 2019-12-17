@@ -1,6 +1,4 @@
-# SFMLTankGameV2
-
-Sprite based 2D tank game.
+# Sprite based 2D tank game.
 
 Made using C++ and SFML graphics library
 
